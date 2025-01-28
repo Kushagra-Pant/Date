@@ -1,5 +1,3 @@
-package Main;
-
 public class Time extends Date {
     private int hour;
     private int min;
