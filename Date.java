@@ -11,6 +11,18 @@ public class Date {
         this.year = year;
     }
 
+    public Date(int day, String month, int year) throws Exception{
+        this.day = day;
+        this.month = Date.monthNum(month);
+        this.year = year;
+    }
+
+    public Date(Date date){
+        day = date.day;
+        month = date.month;
+        year = date.year;
+    }
+
     public void advanceDate(){
         if(day == daysInMonth(month, year)){
             day = 1;
@@ -28,6 +40,23 @@ public class Date {
         for(int i = 0; i < days; i++){
             advanceDate();
         }
+    }
+
+    public void advanceDate(int amount, TimeUnit timeUnit) throws Exception{
+        if(timeUnit == TimeUnit.MONTH){
+            month += amount % 12;
+            year += amount / 12;
+            return;
+        }
+        if(timeUnit == TimeUnit.YEAR){
+            year += amount;
+            return;
+        }
+        if(timeUnit == TimeUnit.DAY){
+            advanceDate(amount);
+            return;
+        }
+        advanceDate(Time.convertToSeconds(amount, timeUnit) / 86400);
     }
 
     public static String monthToString(int month){
@@ -55,6 +84,10 @@ public class Date {
             return true;
         }
         return false;
+    }
+
+    public String toString(){
+        return monthToString(month) + " " + day + ", " + year;
     }
 
     public static int daysInMonth(String month, int year) throws Exception{
