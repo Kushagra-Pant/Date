@@ -147,9 +147,6 @@ public class Date {
      * @return - The date formatted in a user-friendly way
      */
     public String toString(){
-        if(shortForm){
-            return monthToString(month) + " " + day + ", " + year;
-        }
         return monthToString(month) + " " + day + ", " + year;
     }
 
